@@ -12,29 +12,38 @@ class libroController extends Controller
         return Libro::all();
     }
 
-    public function show($id)
+    public function showById($id)
     {
-        return Libro::find($id);
+        return Libro::all()->where('id_book',$id);
     }
+
 
     public function store(Request $request)
     {
-        return Libro::create($request->all());
-    }
+        $book = Libro::create([
+            'price' => $request->price,
 
+        ]);
+    }
+/*
     public function update(Request $request, $id)
     {
-        $article = Libro::findOrFail($id);
-        $article->update($request->all());
+        $libro = Libro::findOrFail($id);
+        $libro->update($request->all());
 
-        return $article;
+        return $libro;
     }
 
     public function delete(Request $request, $id)
     {
-        $article = Libro::findOrFail($id);
-        $article->delete();
+        $libro = Libro::findOrFail($id);
+        $libro->delete();
 
         return 204;
-    }
+    }*/
+
+
+
+
+
 }
