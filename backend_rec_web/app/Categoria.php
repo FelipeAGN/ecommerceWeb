@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Categoria extends Model
 {
     //para acceder a la bd se usa ORM que es una capa de abstraccion que nos ayuda a interpretar
     //los datos de la bd como un objeto, y ofrece metodos para acceder a ellos
@@ -17,6 +17,6 @@ class Category extends Model
     //Relacion de uno a muchos
     public function products(){
         //'cada categoria tiene muchos productos'
-        return $this->hasMany('App\Product');
+        return $this->hasMany('App\Libro');
     }
 }
