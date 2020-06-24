@@ -22,6 +22,9 @@ class CreateLibrosTable extends Migration
 
             $table->timestamps(0);
 
+            $table->integer('rating');
+            $table->string('url_image');
+
             //$table->bigInteger('category_id')->unsigned();
             //$table->foreign('id_category')->references('id_category')->on('categorias');
         });
