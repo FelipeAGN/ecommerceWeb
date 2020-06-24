@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categoria extends Model
 {
+    /*
     //Relacion de uno a muchos
     public function libros(){
         //'cada categoria tiene muchos productos'
@@ -14,5 +15,5 @@ class Categoria extends Model
 
     protected $fillable = [
         'description', 'name_category'
-    ];
+    ];*/
 }

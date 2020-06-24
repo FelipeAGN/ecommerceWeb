@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class libroController extends Controller
 {
+    /*
     public function index()
     {
         return Libro::all();
@@ -43,7 +44,7 @@ class libroController extends Controller
         $libroInDb ->stock = request('stock');
 
         return $libroInDb->save();
-    }
+    }*/
 
 
 

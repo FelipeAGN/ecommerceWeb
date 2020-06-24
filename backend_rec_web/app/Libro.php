@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Libro extends Model
 {
     //
-
+/*
     protected $table = 'libros';
     protected $primaryKey= 'id_book';
 
@@ -20,6 +20,6 @@ class Libro extends Model
         //'cada categoria tiene muchos productos'
         return $this->hasMany('App\Categoria');
     }
-
+*/
 
 }

@@ -14,15 +14,14 @@ class CreateLibrosTable extends Migration
     public function up()
     {
         Schema::create('libros', function (Blueprint $table) {
-            $table->bigIncrements('id_book');
+            $table->id('id_book')->autoIncrement();
             $table->double('price');
             $table->integer('stock');
-
-
+            $table->string('title');
+            $table->string('description');
 
             $table->timestamps(0);
-            $table->string('title',255);
-            $table->string('description',255);
+
             //$table->bigInteger('category_id')->unsigned();
             //$table->foreign('id_category')->references('id_category')->on('categorias');
         });
