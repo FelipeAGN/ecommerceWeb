@@ -9,4 +9,7 @@ class Comentario extends Model
     protected $table = 'comentarios';
     protected $primaryKey= 'id_comment';
     //
+    /*public function Comentario($id){
+
+    }*/
 }

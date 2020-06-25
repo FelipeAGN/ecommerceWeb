@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use phpDocumentor\Reflection\Types\Integer;
 
 class Libro extends Model
 {
@@ -21,5 +22,11 @@ class Libro extends Model
         return $this->hasMany('App\Categoria');
     }
 */
+
+    public function updateRating(Integer $rating){
+        $this->rating+=$rating;
+
+        return $this->rating;
+    }
 
 }

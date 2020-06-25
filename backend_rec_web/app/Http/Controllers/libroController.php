@@ -40,6 +40,7 @@ class libroController extends Controller
         $libro ->updated_at = now();
         $libro ->rating = request('rating');
         $libro ->url_image = request('url_image');
+        $libro->ratings_done=1;
 
 
         return $libro->save();
