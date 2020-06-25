@@ -19,6 +19,9 @@ class CreateComentariosTable extends Migration
             $table->integer('rating');
             $table->string('commented_by');
             $table->timestamps(0);
+
+            $table->foreignId('id_book');
+            $table->foreign('id_book')->references('id_book')->on('libros');
         });
     }
 

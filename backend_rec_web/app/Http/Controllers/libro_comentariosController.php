@@ -11,6 +11,7 @@ class libro_comentariosController extends Controller
 
     }
 
+    //$id = id del libro
     public function storeComment($id){
         request()->validate([
             'id_book' => 'required',
@@ -19,6 +20,14 @@ class libro_comentariosController extends Controller
         $comentario = new Comentario();
 
         $comentario->id_book = request('id_book');
+
+        $comentario->text = request('text');
+        $comentario->rating = request('rating');
+        $comentario->commented_by = request('commented_by');
+        $comentario ->created_at = now();
+        $comentario ->updated_at = now();
+
+
 
         return $comentario->save();
 
