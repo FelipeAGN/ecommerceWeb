@@ -29,4 +29,12 @@ class Libro extends Model
         return $this->rating;
     }
 
+    public function categories(){
+        return $this->belongsToMany(Categoria::class);
+    }
+
+    public function getCategorias(){
+
+    }
+
 }

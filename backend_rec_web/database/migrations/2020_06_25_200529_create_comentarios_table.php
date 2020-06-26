@@ -21,7 +21,7 @@ class CreateComentariosTable extends Migration
             $table->timestamps(0);
 
             $table->foreignId('id_book');
-            $table->foreign('id_book')->references('id_book')->on('libros');
+            $table->foreign('id_book')->references('id_book')->on('libros')->onDelete('cascade');
         });
     }
 

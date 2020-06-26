@@ -14,16 +14,15 @@ class CreateLibroCategoriasTable extends Migration
     public function up()
     {
         Schema::create('libro_categorias', function (Blueprint $table) {
+            $table->id('id_relationship');
             $table->foreignId('id_book');
-            $table->foreign('id_book')->references('id_book')->on('libros');
-
             $table->foreignId('id_category');
-            $table->foreign('id_category')->references('id_category')->on('categorias');
+            $table->timestamps(0);
+            $table->unique('id_book','id_category');
 
-            //$table->foreignId('')
+            $table->foreign('id_book')->references('id_book')->on('libros')->onDelete('cascade');
+            $table->foreign('id_category')->references('id_category')->on('categorias')->onDelete('cascade');
 
-                 //$table->bigInteger('user_id')->unsigned();
-            //$table->foreign('user_id')->refereces('id_user')->on('users');
         });
     }
 

@@ -14,14 +14,25 @@ Route::put('/books/{id}', 'libroController@update');    //updatea properties de 
 //comentarios-libro//
 Route::get('/books/{id}/comentarios', 'comentarioController@getComments');         //Agrega un comentario a un libro
 Route::post('/books/{id}/comentario', 'comentarioController@storeComment');         //Agrega un comentario a un libro
+
+//categoria-libro//
+Route::post('/books/categorias', 'categoriaController@storeCategory');                 //Agrega una categoria a la bd // OK
+Route::get('/categorias', 'categoriaController@getAllCategories');                //retorna todas las categorias de libros que ofrece la tienda //OK
+Route::get('/categoria/{id}', 'categoriaController@getCategory');                //retorna una categoria y sus datos //OK
+
+
+//Route::post('/books/{id}/categoria', 'categoriaController@setCategoryOnBook');         // Setea al libro con {id} una categoria
+//Route::get('/books/{id}/categorias', 'categoriaController@getCategory');                //obtiene las categorias de un libro {id}
+//Route::get('/books/categoria/{id}', 'categoriaController@getAllBooksCategory');         //retorna todos los libros con relacionados a la categoria con id {id}
+
+
+
 /*
 //carrito-libro//
 Route::post('/books/{id}/comentario', 'libroController@storeComment');         //Agrega un comentario a un libro
 Route::get('/books/{id}/comentarios', 'libroController@getComments');         //Agrega un comentario a un libro
 */
-//categoria-libro//
-Route::post('/books/{id}/categoria', 'libroController@storeComment');         //Agrega un comentario a un libro
-Route::get('/books/{id}/categorias', 'libroController@getComments');         //Agrega un comentario a un libro
+
 
 /* ENd of libros*/
 
