@@ -18,7 +18,6 @@ class comentarioController extends Controller
         return Comentario::where('id_book',$id)->firstOrFail();
     }*/
 
-
     public function storeComment($id){
 
         request()->validate([

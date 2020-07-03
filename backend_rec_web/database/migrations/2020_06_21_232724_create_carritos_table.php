@@ -19,10 +19,9 @@ class CreateCarritosTable extends Migration
             $table->timestamps(0);
 
             $table->boolean('comprado');
-            //$table->id('');
 
-            //$table->bigInteger('user_id')->unsigned();
-            //$table->foreign('user_id')->refereces('id_user')->on('users');
+            $table->foreignId('rut')->unsigned();
+            $table->foreign('rut')->references('rut')->on('users');
 
             //$table->bigInteger('id_book')->unsigned();
             //$table->foreign('id_book')->references('id_book')->on('libros');
