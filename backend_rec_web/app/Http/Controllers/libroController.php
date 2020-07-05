@@ -20,6 +20,21 @@ class libroController extends Controller
     }
 
 
+    public function getNewestBooks(){
+
+        return Libro::orderBy('created_at','desc')->take(8)->get();
+        //return Libro::where('id_book',$id)->firstOrFail();
+        //return Libro::all();
+    }
+
+    public function getBestRatedBooks(){
+
+        return Libro::orderBy('rating','desc')->take(8)->get();
+        //return Libro::where('id_book',$id)->firstOrFail();
+        //return Libro::all();
+    }
+
+
     public function store(){
 
         request()->validate([
@@ -29,6 +44,7 @@ class libroController extends Controller
             'rating' => 'required',
             'url_image' => 'required',
             'description' => 'required',
+            'author' => 'required'
         ]);
 
         $libro = new Libro();
@@ -41,7 +57,7 @@ class libroController extends Controller
         $libro ->updated_at = now();
         $libro ->rating = request('rating');
         $libro ->url_image = request('url_image');
-        $libro->ratings_done=1;
+        $libro->author = request('author');
 
 
         return $libro->save();
@@ -86,6 +102,8 @@ class libroController extends Controller
 
         return $extractedBook->save();
     }
+
+
 
 
 

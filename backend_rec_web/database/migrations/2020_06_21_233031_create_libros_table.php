@@ -19,11 +19,14 @@ class CreateLibrosTable extends Migration
             $table->integer('stock');
             $table->string('title');
             $table->string('description');
+            $table->string('author');
 
             $table->timestamps(0);
 
             $table->integer('rating');
             $table->string('url_image');
+            $table->integer('ratings_done')->default(1);
+
 
             //$table->bigInteger('category_id')->unsigned();
             //$table->foreign('id_category')->references('id_category')->on('categorias');

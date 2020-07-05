@@ -10,6 +10,11 @@ Route::get('/books', 'libroController@index');          //retorna una colección
 Route::get('/books/{id}', 'libroController@showById');  //obtiene un solo libro
 Route::post('/books', 'libroController@store');         //Guarda un libro
 Route::put('/books/{id}', 'libroController@update');    //updatea properties de un libro
+Route::get('/newbooks', 'libroController@getNewestBooks');          //retorna una colección de libros
+
+
+//Route::get('/books/newest', 'libroController@getNewestBooks');          //retorna una colección de los ultimos 8 libros añadidos libros
+
 
 //comentarios-libro//
 Route::get('/books/{id}/comentarios', 'comentarioController@getComments');         //Agrega un comentario a un libro
