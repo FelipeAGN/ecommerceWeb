@@ -9,31 +9,21 @@ use Illuminate\Http\Request;
 class libroController extends Controller
 {
 
-    public function index()
-    {
+    public function index(){
         return Libro::all();
     }
 
-    public function showById($id)
-    {
+    public function showById($id){
         return Libro::where('id_book',$id)->firstOrFail();
     }
 
-
     public function getNewestBooks(){
-
         return Libro::orderBy('created_at','desc')->take(8)->get();
-        //return Libro::where('id_book',$id)->firstOrFail();
-        //return Libro::all();
     }
 
     public function getBestRatedBooks(){
-
         return Libro::orderBy('rating','desc')->take(8)->get();
-        //return Libro::where('id_book',$id)->firstOrFail();
-        //return Libro::all();
     }
-
 
     public function store(){
 
@@ -59,15 +49,8 @@ class libroController extends Controller
         $libro ->url_image = request('url_image');
         $libro->author = request('author');
 
-
         return $libro->save();
     }
-    /*
-    public function edit($id){
-
-        $libro = Libro::find($id);
-    }*/
-
 
     public function update($id){
 
@@ -80,7 +63,6 @@ class libroController extends Controller
             'url_image' => 'required',
             'description' => 'required',
         ]);
-
 
         $extractedBook = Libro::where('id_book',$id)->firstOrFail();
 
@@ -99,15 +81,6 @@ class libroController extends Controller
         $extractedBook->rating = request('rating');
         $extractedBook->url_image = request('url_image');
 
-
         return $extractedBook->save();
     }
-
-
-
-
-
-
-
-
 }
