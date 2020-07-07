@@ -11,7 +11,12 @@ class userController extends Controller
 {
     public function create(Request $request){
         request()->validate([
-            'rut' => 'required'
+            'rut' => 'required',
+            'fullname' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
         ]);
 
         $user = new User();
@@ -44,8 +49,49 @@ class userController extends Controller
     }
 
 
-    public function quitarLibro(){
+    public function obtenerTotalPago($rut)
+    {
+        $carrito_con_deuda = Carrito::where([
+                'rut' => $rut,
+                'comprado' => 0
+        ])->get();
 
+        $monto_a_pagar = 0;
+        foreach ($carrito_con_deuda as $carrito) {
+            $monto_a_pagar += $carrito->libro_total;
+        }
+        return $monto_a_pagar;
+    }
+
+    public function ingresarPago($rut)
+    {
+        $carrito_con_deuda = Carrito::where([
+            'rut' => $rut,
+            'comprado' => 0
+        ])->get();
+
+        foreach ($carrito_con_deuda as $carrito) {
+           $carrito->comprado= true;
+           $carrito->save(); //se guarda el cambio de estado del carrito[i]
+        }
+
+        return response('¡Pago efectuado con éxito!');
+    }
+
+
+    public function disminuirLibro($id) //request me trae ->idbook y ->idcarrito
+    {
+        $carrito = Carrito::where('id',$id);
+        $valorLibro = $carrito->libro_total / $carrito->cantidad_libros;
+
+        $carrito->cantidad_libros--;
+        $carrito->libro_total = $valorLibro * $carrito->cantidad_libros;
+
+        if($carrito->save()){
+            return true;
+        }
+
+        return false;
     }
 
 }

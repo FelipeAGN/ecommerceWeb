@@ -20,34 +20,31 @@ Route::post('/books/categorias', 'categoriaController@storeCategory');          
 Route::get('/categorias', 'categoriaController@getAllCategories');                //retorna todas las categorias de libros que ofrece la tienda //OK
 Route::get('/categoria/{id}', 'categoriaController@getCategory');                //retorna una categoria y sus datos //OK
 
-
 //Route::post('/books/{id}/categoria', 'categoriaController@setCategoryOnBook');         // Setea al libro con {id} una categoria
 //Route::get('/books/{id}/categorias', 'categoriaController@getCategory');                //obtiene las categorias de un libro {id}
 //Route::get('/books/categoria/{id}', 'categoriaController@getAllBooksCategory');         //retorna todos los libros con relacionados a la categoria con id {id}
 
-//Carro de compras//
-Route::post('/carrocompras', 'carritoController@storeCarrito');                                      //OK
-Route::get('/carrocompras', 'carritoController@getCarritos');                                       //OK
-Route::get('/carrocompras/{id}/usuario-carro', 'carritoController@getUserCarrito');                 //OK
-Route::patch('/carrocompras/{id}/pagar-carro', 'carritoController@pagarCarrito');
-Route::get('/carrocompras/{id}/total-carro', 'carritoController@getTotalCarrito');                   //OK
-
-//Route::post('/carrocompras/{id}/agregar-producto', 'carritoController@addProductoToCarrito');                  //updatea properties de un libro
-Route::post('/carrocompras/agregar-producto', 'carritoController@storeCarritoConProducto');         //updatea properties de un libro
-
+/* User y carrito */
 Route::post('/crearusuario', 'userController@create');                                              //updatea properties de un libro
-Route::post('/agregarLibroAcarrito', 'userController@agregarLibro');                                 //updatea properties de un libro
+Route::post('/libroAcarrito', 'userController@agregarLibro');                                 //updatea properties de un libro
+Route::get('/totalpagar/{rut}', 'userController@obtenerTotalPago');                                 //updatea properties de un libro
+Route::put('/pagar/{rut}', 'userController@ingresarPago');                                 //updatea properties de un libro
 
-/*
-Route::get('/carrocompras/{id}/productos', 'carritoController@getProductosCarrito');                   //retorna todas las categorias de libros que ofrece la tienda //OK
+//not ok
+Route::put('/lesslibro/{id}', 'userController@disminuirLibro');                                 //updatea properties de un libro
+Route::put('/morelibro/{id}', 'userController@aumentarLibro');                                    // aumenta en 1 el libro
 
-Route::patch('/carrocompras/{id}/', 'libroController@modificarProductoCarrito');         //updatea properties de un libro
-*/
 
-/*
-//carrito-libro//
-Route::post('/books/{id}/comentario', 'libroController@storeComment');         //Agrega un comentario a un libro
-Route::get('/books/{id}/comentarios', 'libroController@getComments');         //Agrega un comentario a un libro
-*/
+// CArrito only -> ok//
+Route::get('/carrito/{id}', 'carritoController@obtenerCarrito');                                 //updatea properties de un libro
+Route::get('/carrito/{id}/total', 'carritoController@obtenerTotalCarrito');                                 //updatea properties de un libro
+Route::get('/carrito/{id}/estado', 'carritoController@obtenerEstadoCarrito');                                 //updatea properties de un libro
+Route::get('/carrito/{id}/cantlibros', 'carritoController@obtenerCantidadLibrosCarrito');                                 //updatea properties de un libro
+
+
+
+
+
+
 
 
