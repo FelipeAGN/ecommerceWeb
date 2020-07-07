@@ -12,7 +12,6 @@ class userController extends Controller
     public function create(Request $request){
         request()->validate([
             'rut' => 'required',
-            'fullname' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
@@ -21,7 +20,6 @@ class userController extends Controller
 
         $user = new User();
         $user->rut = $request->rut;
-        $user->fullname = $request->fullname;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
