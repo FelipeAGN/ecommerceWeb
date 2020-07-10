@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 
 class userController extends Controller
 {
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         request()->validate([
             'rut' => 'required',
             'first_name' => 'required',
@@ -19,6 +20,7 @@ class userController extends Controller
         ]);
 
         $user = new User();
+
         $user->rut = $request->rut;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
@@ -28,7 +30,7 @@ class userController extends Controller
         $user->address = $request->address;
 
         $user->save();
-        return ;
+        return;
     }
 
     public function agregarLibro(Request $request)
@@ -50,8 +52,8 @@ class userController extends Controller
     public function obtenerTotalPago($rut)
     {
         $carrito_con_deuda = Carrito::where([
-                'rut' => $rut,
-                'comprado' => 0
+            'rut' => $rut,
+            'comprado' => 0
         ])->get();
 
         $monto_a_pagar = 0;
@@ -69,8 +71,8 @@ class userController extends Controller
         ])->get();
 
         foreach ($carrito_con_deuda as $carrito) {
-           $carrito->comprado= true;
-           $carrito->save(); //se guarda el cambio de estado del carrito[i]
+            $carrito->comprado = true;
+            $carrito->save(); //se guarda el cambio de estado del carrito[i]
         }
 
         return response('¡Pago efectuado con éxito!');
@@ -79,17 +81,20 @@ class userController extends Controller
 
     public function disminuirLibro($id) //request me trae ->idbook y ->idcarrito
     {
-        $carrito = Carrito::where('id',$id);
+        $carrito = Carrito::where('id', $id);
         $valorLibro = $carrito->libro_total / $carrito->cantidad_libros;
 
         $carrito->cantidad_libros--;
         $carrito->libro_total = $valorLibro * $carrito->cantidad_libros;
 
-        if($carrito->save()){
+        if ($carrito->save()) {
             return true;
         }
 
         return false;
     }
+
+
+
 
 }

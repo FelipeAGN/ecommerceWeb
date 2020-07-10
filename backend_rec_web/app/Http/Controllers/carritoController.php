@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 
 class carritoController extends Controller
 {
+    public function create(){
+        $carrito = new Carrito();
+        $carrito->created_at = now();
+        $carrito->updated_at = now();
+        return $carrito->save();
+    }
+
+    public function obtenerUltimoCarrito(){
+        return $carrito = Carrito::orderBy('created_at','desc')->take(1)->get();
+    }
+
     public function obtenerCarrito($id){
         $carrito = new Carrito();
         return $carrito->obtenerCarrito($id);
@@ -27,5 +38,7 @@ class carritoController extends Controller
         $carrito = new Carrito();
         return $carrito->obtenerCantidadLibros($id);
     }
+
+
 
 }
