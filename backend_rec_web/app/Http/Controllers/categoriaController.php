@@ -48,7 +48,11 @@ class categoriaController extends Controller
         if(! $librosEnCategoria){
             return abort(404);
         }
-
-        return $librosEnCategoria;
+        $libros = array();
+        foreach ($librosEnCategoria as $l) {
+            $li = libroController::showById($l->id_book);
+            array_push($libros, $li);
+        }
+        return $libros;
     }
 }

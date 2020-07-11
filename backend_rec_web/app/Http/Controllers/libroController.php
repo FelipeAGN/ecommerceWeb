@@ -13,7 +13,7 @@ class libroController extends Controller
         return Libro::all();
     }
 
-    public function showById($id){
+    public static function showById($id){
         return Libro::where('id_book',$id)->firstOrFail();
     }
 
