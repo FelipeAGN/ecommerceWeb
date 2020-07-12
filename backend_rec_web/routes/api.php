@@ -42,7 +42,7 @@ Route::get('/categoria/{id}', 'categoriaController@getBooksOfCategory');        
 
 
 /*Mensajes de contacto para administrador*/
-Route::post('/contacto', 'contactoController@store');                 //Agrega una categoria a la bd // OK
+Route::post('/contacto', 'contactoController@create');                 //Agrega una categoria a la bd // OK
 
 
 

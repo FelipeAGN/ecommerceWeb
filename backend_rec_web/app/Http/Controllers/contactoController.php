@@ -10,27 +10,19 @@ class contactoController extends Controller
     public function create(Request $request)
     {
         request()->validate([
-            'mail' => 'required',
+            'email' => 'required',
             'subject' => 'required',
-            'body' => 'required',
+            'message' => 'required',
         ]);
 
         $mensaje_contacto = new Contacto();
 
-        $mensaje_contacto->email= $request->mail;
+        $mensaje_contacto->email= $request->email;
         $mensaje_contacto->subject= $request->subject;
-        $mensaje_contacto->message= $request->body;
+        $mensaje_contacto->message= $request->message;
+        $mensaje_contacto->created_at=now();
+        $mensaje_contacto->updated_at =now();
 
-        /*
-                $user->rut = $request->rut;
-                $user->first_name = $request->first_name;
-                $user->last_name = $request->last_name;
-                $user->email = $request->email;
-                $user->created_at = now();
-                $user->updated_at = now();
-                $user->address = $request->address;
-
-                $user->save();*/
         return $mensaje_contacto->save();
     }
     //
