@@ -15,8 +15,11 @@ Route::get('/books/{id}/comentarios', 'comentarioController@getComments');      
 Route::post('/books/{id}/comentario', 'comentarioController@storeComment');         //Agrega un comentario a un libro {id}
 
 
-/* User y carrito */
-Route::post('/crearCarritoEmpty', 'carritoController@create');                                              //updatea properties de un libro
+/* carrito */
+Route::post('/crearCarritoConLibro', 'carritoController@createCarritoConLibro');                                              //updatea properties de un libro
+Route::get('/carritos', 'carritoController@index');                                              //updatea properties de un libro
+
+/* User */
 Route::post('/crearusuario', 'userController@create');                                              //updatea properties de un libro
 Route::post('/libroAcarrito', 'userController@agregarLibro');                                 //updatea properties de un libro
 Route::get('/totalpagar/{rut}', 'userController@obtenerTotalPago');                                 //updatea properties de un libro

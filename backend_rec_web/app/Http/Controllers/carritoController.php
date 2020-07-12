@@ -8,10 +8,23 @@ use Illuminate\Http\Request;
 
 class carritoController extends Controller
 {
-    public function create(){
+
+    public function index(){
+        return Carrito::all();
+    }
+
+    public function createCarritoConLibro(Request $request){
+
         $carrito = new Carrito();
+        $carrito->id_book = $request->id_book;
+        $carrito->cantidad_libros=1;
+
+        $libro = Libro::where('id_book', $request->id_book)->firstOrFail();
+        $carrito->libro_total=$libro->price;
+
         $carrito->created_at = now();
         $carrito->updated_at = now();
+
         return $carrito->save();
     }
 
