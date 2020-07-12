@@ -22,8 +22,8 @@ Route::get('/carritos', 'carritoController@index');                             
 /* User */
 Route::post('/crearusuario', 'userController@create');                                              //updatea properties de un libro
 Route::post('/libroAcarrito', 'userController@agregarLibro');                                 //updatea properties de un libro
-Route::get('/totalpagar/{rut}', 'userController@obtenerTotalPago');                                 //updatea properties de un libro
-Route::put('/pagar/{rut}', 'userController@ingresarPago');                                 //updatea properties de un libro
+Route::get('/totalpagar', 'userController@obtenerTotalPago');                                 //updatea properties de un libro
+Route::delete('/pagar', 'userController@ingresarPago');                                 //updatea properties de un libro
 
 //not ok
 Route::put('/lesslibro/{id}', 'userController@disminuirLibro');                                 //updatea properties de un libro

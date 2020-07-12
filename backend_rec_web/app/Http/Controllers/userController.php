@@ -29,10 +29,18 @@ class userController extends Controller
         $user->updated_at = now();
         $user->address = $request->address;
 
+        $carritos = Carrito::all()->where('rut',$user->rut);
+
+        foreach ($carritos as $carrito_deuda) {
+            $carrito_deuda->rut = $user->rut;
+            $carrito_deuda->save(); //se guarda el cambio de estado del carrito[i]
+        }
+
         $user->save();
         return;
     }
 
+    /*
     public function agregarLibro(Request $request)
     {
         $libro = Libro::where('id_book', $request->id_book)->firstOrFail();
@@ -46,53 +54,33 @@ class userController extends Controller
         $carrito->updated_at = now();
 
         return $carrito->save();
-    }
+    }*/
 
 
-    public function obtenerTotalPago($rut)
+    public function obtenerTotalPago()
     {
-        $carrito_con_deuda = Carrito::where([
-            'rut' => $rut,
-            'comprado' => 0
-        ])->get();
+        $carrito_con_deuda = Carrito::where('comprado',0)->get();
 
         $monto_a_pagar = 0;
+
         foreach ($carrito_con_deuda as $carrito) {
             $monto_a_pagar += $carrito->libro_total;
         }
         return $monto_a_pagar;
     }
 
-    public function ingresarPago($rut)
+    public function ingresarPago()
     {
-        $carrito_con_deuda = Carrito::where([
-            'rut' => $rut,
-            'comprado' => 0
-        ])->get();
+        $carrito_con_deuda = Carrito::all();
 
         foreach ($carrito_con_deuda as $carrito) {
-            $carrito->comprado = true;
-            $carrito->save(); //se guarda el cambio de estado del carrito[i]
+            $carrito->delete();
         }
-
-        return response('¡Pago efectuado con éxito!');
+        return true;
     }
 
 
-    public function disminuirLibro($id) //request me trae ->idbook y ->idcarrito
-    {
-        $carrito = Carrito::where('id', $id);
-        $valorLibro = $carrito->libro_total / $carrito->cantidad_libros;
 
-        $carrito->cantidad_libros--;
-        $carrito->libro_total = $valorLibro * $carrito->cantidad_libros;
-
-        if ($carrito->save()) {
-            return true;
-        }
-
-        return false;
-    }
 
 
 

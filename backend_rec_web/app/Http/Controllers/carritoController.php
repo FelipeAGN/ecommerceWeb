@@ -21,12 +21,31 @@ class carritoController extends Controller
 
         $libro = Libro::where('id_book', $request->id_book)->firstOrFail();
         $carrito->libro_total=$libro->price;
+        $carrito->nombre_libro = $libro->title;
 
         $carrito->created_at = now();
         $carrito->updated_at = now();
 
         return $carrito->save();
     }
+
+    public function disminuirLibro($id) //request me trae ->idbook y ->idcarrito
+    {
+        $carrito = Carrito::where('id', $id);
+        $valorLibro = $carrito->libro_total / $carrito->cantidad_libros;
+
+        $carrito->cantidad_libros--;
+        $carrito->libro_total = $valorLibro * $carrito->cantidad_libros;
+
+        if ($carrito->save()) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+
 
     public function obtenerUltimoCarrito(){
         return $carrito = Carrito::orderBy('created_at','desc')->take(1)->get();
