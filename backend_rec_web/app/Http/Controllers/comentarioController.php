@@ -18,7 +18,7 @@ class comentarioController extends Controller
         return Comentario::where('id_book',$id)->firstOrFail();
     }*/
 
-    public function storeComment($id){
+    public function storeComment($id, Request $request){
 
         request()->validate([
             'text' => 'required',
@@ -26,14 +26,11 @@ class comentarioController extends Controller
             'commented_by' => 'required',
         ]);
 
-
         $comentario = new Comentario();
 
-        $comentario->text = request('text');
-        $comentario ->rating = request('rating');
-        $comentario ->commented_by = request('commented_by');
-        $comentario->created_at = now();
-        $comentario->updated_at = now();
+        $comentario->text = $request->text;
+        $comentario ->rating = $request->rating;
+        $comentario ->commented_by = $request->commented_by;
         $comentario->id_book = $id;
 
 
@@ -47,43 +44,3 @@ class comentarioController extends Controller
         return $comentario->save();
     }
 }
-
-/*
-
-namespace App\Http\Controllers;
-
-use App\Comentario;
-use Illuminate\Http\Request;
-
-class libro_comentariosController extends Controller
-{
-    public function getComments($id){
-
-    }
-
-    //$id = id del libro
-    public function storeComment($id){
-        request()->validate([
-            'id_book' => 'required',
-        ]);
-
-        $comentario = new Comentario();
-
-        $comentario->id_book = request('id_book');
-
-        $comentario->text = request('text');
-        $comentario->rating = request('rating');
-        $comentario->commented_by = request('commented_by');
-        $comentario ->created_at = now();
-        $comentario ->updated_at = now();
-
-
-
-        return $comentario->save();
-
-    }
-
-
-    //
-}
-*/
