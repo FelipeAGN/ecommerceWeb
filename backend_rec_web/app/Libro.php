@@ -33,8 +33,5 @@ class Libro extends Model
         return $this->belongsToMany(Categoria::class);
     }
 
-    public function getCategorias(){
-
-    }
 
 }

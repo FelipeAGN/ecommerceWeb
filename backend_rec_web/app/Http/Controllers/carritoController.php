@@ -15,11 +15,12 @@ class carritoController extends Controller
 
     public function createCarritoConLibro(Request $request){
 
+        $libro = Libro::where('id_book', $request->id_book)->firstOrFail();
+
         $carrito = new Carrito();
         $carrito->id_book = $request->id_book;
         $carrito->cantidad_libros=1;
 
-        $libro = Libro::where('id_book', $request->id_book)->firstOrFail();
         $carrito->libro_total=$libro->price;
         $carrito->nombre_libro = $libro->title;
 
@@ -29,23 +30,37 @@ class carritoController extends Controller
         return $carrito->save();
     }
 
-    public function disminuirLibro($id) //request me trae ->idbook y ->idcarrito
+
+    public function disminuirLibro(Request $request)
     {
-        $carrito = Carrito::where('id', $id);
-        $valorLibro = $carrito->libro_total / $carrito->cantidad_libros;
+        $carrito = Carrito::where('id', $request->id)->firstOrFail();
+
+        $libro = Libro::where('id_book', $request->id_book)->firstOrFail();
 
         $carrito->cantidad_libros--;
-        $carrito->libro_total = $valorLibro * $carrito->cantidad_libros;
+        $carrito->libro_total = $carrito->cantidad_libros * $libro->price;
 
-        if ($carrito->save()) {
-            return true;
-        }
-
-        return false;
+        return $carrito->save();
     }
 
+    public function aumentarLibro(Request $request)
+    {
+        $carrito = Carrito::where('id',$request->id)->firstOrFail();
 
+        $libro = Libro::where('id_book',$request->id_book)->firstOrFail();
 
+        $carrito->cantidad_libros++;
+        $carrito->libro_total= $carrito->cantidad_libros * $libro->price;
+
+        return $carrito->save();
+    }
+
+    public function quitarLibro($id_carrito)
+    {
+        $carrito = Carrito::where('id',$id_carrito)->firstOrFail();
+
+        return $carrito->delete();
+    }
 
     public function obtenerUltimoCarrito(){
         return $carrito = Carrito::orderBy('created_at','desc')->take(1)->get();

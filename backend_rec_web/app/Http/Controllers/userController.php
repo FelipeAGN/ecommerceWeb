@@ -36,8 +36,7 @@ class userController extends Controller
             $carrito_deuda->save(); //se guarda el cambio de estado del carrito[i]
         }
 
-        $user->save();
-        return;
+        return $user->save();
     }
 
     /*
@@ -76,7 +75,7 @@ class userController extends Controller
         foreach ($carrito_con_deuda as $carrito) {
             $carrito->delete();
         }
-        return true;
+        return ;
     }
 
 

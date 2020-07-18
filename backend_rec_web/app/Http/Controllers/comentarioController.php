@@ -10,13 +10,8 @@ class comentarioController extends Controller
 {
     public function getComments($id)
     {
-        return Comentario::all()->where('id_book',$id);
+        return Comentario::where('id_book',$id)->take(4)->get();
     }
-/*
-    public function showById($id)
-    {
-        return Comentario::where('id_book',$id)->firstOrFail();
-    }*/
 
     public function storeComment($id, Request $request){
 
